@@ -1,0 +1,6 @@
+@TrackMyFinance.API_HostAddress = http://localhost:5062
+
+GET {{TrackMyFinance.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
