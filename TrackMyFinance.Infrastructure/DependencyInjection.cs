@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrackMyFinance.Application.Interfaces;
 using TrackMyFinance.Infrastructure.Data;
+using TrackMyFinance.Infrastructure.Services;
 
 namespace TrackMyFinance.Infrastructure
 {
@@ -14,6 +16,8 @@ namespace TrackMyFinance.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<ICategoryService, CategoryService>();
+
             services.AddDbContext<ApplicationDbContext>(opt =>
             {
                 opt.UseSqlServer(configuration.GetConnectionString("Default"));

@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="v1\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TrackMyFinance.Domain\TrackMyFinance.Domain.csproj" />
   </ItemGroup>
 
