@@ -25,12 +25,10 @@ namespace TrackMyFinance.API.Controllers.v1
             => _mediator = mediator;
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<ApiResult<List<GetCategoryResponse>>>> Get([FromQuery] GetCategoryRequest request)
         {
-            if(!User.Identity?.IsAuthenticated ?? false)
-            {
-                return new UnAuthActionResult();
-            }
+            
 
             return await _mediator.Send(new GetCategoryQuery(request));
         }

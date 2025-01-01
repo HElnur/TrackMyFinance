@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.IdentityModel.Tokens;
@@ -51,12 +51,11 @@ builder.Services.AddAuthentication(options =>
     {
         ValidIssuer = builder.Configuration["JWTSettings:Issuer"],
         ValidAudience = builder.Configuration["JWTSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey
-        (Encoding.UTF8.GetBytes(builder.Configuration["JWTSettings:Key"])),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = false,
-        ValidateIssuerSigningKey = true
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSettings:Key"])),
+        ValidateIssuer = true,  // Prodüksiyon ortamında true olmalı
+        ValidateAudience = true,  // Prodüksiyon ortamında true olmalı
+        ValidateLifetime = true,  // Token süresi geçerli mi diye kontrol eder
+        ValidateIssuerSigningKey = true  // İmza doğrulaması yapılmalı
     };
 });
 
