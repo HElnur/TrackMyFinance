@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\v1\Type\Commands\Delete\" />
     <Folder Include="CQRS\v1\Type\Queries\Get\" />
   </ItemGroup>
 
