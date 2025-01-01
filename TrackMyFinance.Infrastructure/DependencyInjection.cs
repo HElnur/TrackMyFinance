@@ -17,6 +17,8 @@ namespace TrackMyFinance.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IJWTService, JWTService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddDbContext<ApplicationDbContext>(opt =>
             {
