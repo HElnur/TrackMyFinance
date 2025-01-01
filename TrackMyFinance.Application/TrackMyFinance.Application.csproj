@@ -17,8 +17,4 @@
     <ProjectReference Include="..\TrackMyFinance.Models\TrackMyFinance.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CQRS\v1\Type\Queries\Get\" />
-  </ItemGroup>
-
 </Project>
