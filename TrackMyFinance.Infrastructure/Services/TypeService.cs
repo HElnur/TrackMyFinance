@@ -84,7 +84,22 @@ namespace TrackMyFinance.Infrastructure.Services
 
         public async Task<ApiResult<UpdateTypeResponse>> Update(UpdateTypeRequest request)
         {
-            throw new NotImplementedException();
+            var type = await _context.Types.FindAsync(request.Id);
+
+            if (type == null)
+                return ApiResult<UpdateTypeResponse>.Error(ErrorCodes.INFORMATION_NOT_FOUND);
+
+            type.Name = request.Name;
+
+            await _context.SaveChangesAsync();
+
+            var response = new UpdateTypeResponse
+            {
+                Id = type.Id,
+                Name = type.Name,
+            };
+
+            return ApiResult<UpdateTypeResponse>.OK(response);
         }
     }
 }
