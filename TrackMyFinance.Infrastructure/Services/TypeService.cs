@@ -48,17 +48,41 @@ namespace TrackMyFinance.Infrastructure.Services
             return ApiResult<CreateTypeResponse>.OK(response);
         }
 
-        public Task<ApiResult<Guid>> Delete(Guid id)
+        public async Task<ApiResult<Guid>> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var type = await _context.Types.FindAsync(id);
+
+            if (type == null)
+                return ApiResult<Guid>.Error(ErrorCodes.INFORMATION_NOT_FOUND);
+
+            _context.Types.Remove(type);
+            await _context.SaveChangesAsync();
+
+            return ApiResult<Guid>.OK(type.Id);
         }
 
-        public Task<ApiResult<List<GetTypeResponse>>> Get(GetTypeRequest request)
+        public async Task<ApiResult<List<GetTypeResponse>>> Get(GetTypeRequest request)
         {
-            throw new NotImplementedException();
+            var query = _context.Types.AsQueryable().AsNoTracking();
+
+            if(request.Id != null)
+                query = query.Where(x => x.Id == request.Id);
+
+            if (request.Name != null)
+                query = query.Where(x => x.Name == request.Name);
+
+            var types = await query.Select(x => new GetTypeResponse
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CreateAt = x.CreateAt.ToString("dd MMMM yyyy"),
+                UpdateAt = x.UpdateAt.ToString("dd MMMM yyyy"),
+            }).ToListAsync();
+
+            return ApiResult<List<GetTypeResponse>>.OK(types);
         }
 
-        public Task<ApiResult<UpdateTypeResponse>> Update(UpdateTypeRequest request)
+        public async Task<ApiResult<UpdateTypeResponse>> Update(UpdateTypeRequest request)
         {
             throw new NotImplementedException();
         }

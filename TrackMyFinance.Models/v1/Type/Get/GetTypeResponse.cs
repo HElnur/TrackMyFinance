@@ -10,5 +10,7 @@ namespace TrackMyFinance.Models.v1.Type.Get
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string CreateAt { get; set; }
+        public string UpdateAt { get; set; }
     }
 }
